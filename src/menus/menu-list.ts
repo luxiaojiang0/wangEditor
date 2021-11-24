@@ -6,6 +6,7 @@
 import Bold from './bold/index'
 import Head from './head/index'
 import Link from './link/index'
+import LinkCard from './link-card/index'
 import Italic from './italic/index'
 import Underline from './underline/index'
 import StrikeThrough from './strike-through/index'
@@ -37,6 +38,7 @@ export default {
     head: Head,
     italic: Italic,
     link: Link,
+    linkCard: LinkCard,
     underline: Underline,
     strikeThrough: StrikeThrough,
     fontName: FontStyle,

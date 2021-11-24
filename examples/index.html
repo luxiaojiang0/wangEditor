@@ -13,7 +13,8 @@
     <p>
         wangEditor demo
     </p>
-    <div id="div1">
+    <div id="div1"></div>
+    <div id="textSelector">
         <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
         <p>
             <img src="http://www.wangeditor.com/imgs/logo.jpeg" />
@@ -22,17 +23,45 @@
 
     <script src="../dist/wangEditor.js"></script>
     <script>
+
+        /*
+        *
+        document.execCommand(name, false, "<a  href="4444" target="_blank"><p contenteditable="false">4444</p></a>")
+
+        *
+        * */
         // 改为使用var声明，才能在window对象上获取到编辑器实例，方便e2e测试
         var E = window.wangEditor
-        var editor = new E('#div1')
+        var editor = new E('#div1', '#textSelector')
 
-        editor.config.onchange = function (newHtml) {
-            console.log('onchange', newHtml)
+        const editorConfig = {
+            pasteFilterStyle: true,
+            showFullScreen: false,
+            uploadImgServer: 'http://192.168.205.51:8888/upload',
+            uploadImgMaxLength: 1,
+            imageStyle: 'display: block;',
+            menus: [
+                'emoticon',
+                'image',
+                'linkCard',
+                'link',
+            ],
+            // emotions: EMOJI_DICT,
+
+            onchange (e,t) {
+                console.log('change')
+            },
         }
-        editor.config.onblur = function (newHtml) {
-            console.log('onblur', newHtml)
-        }
-        editor.config.placeholder = '请输入...'
+
+        Object.assign(editor.config, editorConfig)
+
+        // editor.config.onchange = function (newHtml) {
+        //     console.log('onchange', newHtml)
+        // }
+        // editor.config.onblur = function (newHtml) {
+        //     console.log('onblur', newHtml)
+        // }
+        // editor.config.placeholder = '请输入...'
         // editor.config.onfocus = function (newHtml) {
         //     console.log('onfocus', newHtml)
         // }
@@ -44,10 +73,24 @@
         // 这行代码用来测试不同屏幕宽度，panel菜单的位置
         // editor.config.menus = [
         //     'image'
-        // ] 
+        // ]
 
-        editor.config.showFullScreen = true
+        // editor.config.showFullScreen = true
         editor.create()
+
+        editor.$textElem.elems[0].addEventListener('keydown', keypress)
+        function isNoBackspace() {
+            const selection = editor.selection
+            console.log(selection)
+        }
+        function keypress(e) {
+            console.log(e)
+            if(e.inputType === 'deleteContentBackward') {
+                isNoBackspace()
+                // e.preventDefault()
+            }
+            // e.preventDefault()
+        }
     </script>
 </body>
 

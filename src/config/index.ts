@@ -48,6 +48,7 @@ export type ConfigType = {
     pasteIgnoreImg: boolean
     pasteTextHandle: Function
     styleWithCSS: boolean
+    imageStyle: string // 图片混入样式
     linkImgCallback: Function
     onSelectionChange: Function
 

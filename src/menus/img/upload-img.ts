@@ -38,10 +38,11 @@ class UploadImg {
         // 设置图片alt
         const altText = alt ? `alt="${alt}" ` : ''
         const hrefText = href ? `data-href="${encodeURIComponent(href)}" ` : ''
+        const style = `style="${config.imageStyle}max-width:100%;"`
         // 先插入图片，无论是否能成功
         editor.cmd.do(
             'insertHTML',
-            `<img src="${src}" ${altText}${hrefText}style="max-width:100%;" contenteditable="false"/>`
+            `<img src="${src}" ${altText}${hrefText}${style} contenteditable="true"/><p><br></p>`
         )
         // 执行回调函数
         config.linkImgCallback(src, alt, href)
