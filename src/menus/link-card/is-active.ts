@@ -6,15 +6,17 @@
 import Editor from '../../editor/index'
 
 function isActive(editor: Editor): boolean {
-    const $selectionELem = editor.selection.getSelectionContainerElem()
-    if (!$selectionELem?.length) {
-        return false
-    }
-    if ($selectionELem.getNodeName() === 'A') {
-        return true
-    } else {
-        return false
-    }
+    // 无选中样式
+    // const $selectionELem = editor.selection.getSelectionContainerElem()
+    // if (!$selectionELem?.length) {
+    //     return false
+    // }
+    // if ($selectionELem.getNodeName() === 'A') {
+    //     return true
+    // } else {
+    //     return false
+    // }
+    return false
 }
 
 export default isActive

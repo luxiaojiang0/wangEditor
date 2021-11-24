@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wangEditor example</title>
     <style>
+        p:before {
+            display: inline-block;
+            contain: ' ';
+        }
     </style>
 </head>
 
@@ -15,11 +19,10 @@
     </p>
     <div id="div1"></div>
     <div id="textSelector">
-        <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
-        <p>
-            <img src="http://www.wangeditor.com/imgs/logo.jpeg" />
-        </p>
+<!--        <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>-->
     </div>
+    <button onclick="show()">show</button>
+    <div id="view" class="w-e-text w-e-content-preview"></div>
 
     <script src="../dist/wangEditor.js"></script>
     <script>
@@ -37,15 +40,16 @@
         const editorConfig = {
             pasteFilterStyle: true,
             showFullScreen: false,
-            uploadImgServer: 'http://192.168.205.51:8888/upload',
+            uploadImgServer: 'http://192.168.8.19:8888/upload',
             uploadImgMaxLength: 1,
             imageStyle: 'display: block;',
             menus: [
                 'emoticon',
                 'image',
                 'linkCard',
-                'link',
+                'foreColor',
             ],
+            linkCardImg: 'https://herobox-cdn.yingxiong.com/link/icon_link.png',
             // emotions: EMOJI_DICT,
 
             onchange (e,t) {
@@ -90,6 +94,13 @@
                 // e.preventDefault()
             }
             // e.preventDefault()
+        }
+        function show() {
+
+            const viewDom = document.querySelector('#view')
+            console.log(0, viewDom)
+            console.log(editor.txt.getJSON())
+            viewDom.innerHTML = editor.txt.html()
         }
     </script>
 </body>

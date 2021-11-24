@@ -95,7 +95,7 @@ export default function (editor: Editor): void {
     $toolbarElem.addClass('w-e-toolbar').css('z-index', editor.zIndex.get('toolbar'))
     $textContainerElem.addClass('w-e-text-container')
     $textContainerElem.css('z-index', editor.zIndex.get())
-    $textElem.addClass('w-e-text')
+    $textElem.addClass('w-e-text w-e-text--editing')
 
     // 添加 ID
     const toolbarElemId = getRandom('toolbar-elem')

@@ -41,7 +41,6 @@ class LinkCard extends PanelMenu implements MenuActive {
         const $textElem = editor.$textElem
         const html = $textElem.html()
         const $txtHtml = html.trim()
-
         if ($txtHtml === EMPTY_P) {
             const $emptyChild = $textElem.children()
             // 调整选区
@@ -53,7 +52,8 @@ class LinkCard extends PanelMenu implements MenuActive {
 
         // 判断是否是多行 多行则退出 否则会出现问题
         if ($selectionElem && editor.$textElem.equal($selectionElem)) {
-            return
+
+            // return 暂时用不上
         }
 
         if (this.isActive) {

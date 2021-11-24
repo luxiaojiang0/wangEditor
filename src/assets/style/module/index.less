@@ -1,0 +1,90 @@
+// 编辑状态
+.w-e-text--editing {
+  .w-e_delete-button {
+    display: block;
+  }
+}
+.w-e-text {
+
+}
+
+// 删除按钮
+.w-e_delete-button {
+  display: none;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 50%;
+  background: gray;
+  cursor: pointer;
+}
+.w-e_delete-button:before,
+.w-e_delete-button:after
+{
+  content: ' ';
+  height: 8px;
+  position: absolute;
+  width: 1px;
+  top: 50%;
+  left: 50%;
+  background: white;
+
+}
+.w-e_delete-button:hover {
+  box-shadow: 1px 2px 3px #888888;
+}
+.w-e_delete-button:before {
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+.w-e_delete-button:after {
+  transform: translate(-50%, -50%) rotateZ(-45deg);
+}
+
+/* 卡片 */
+// 图片
+.w-e_img-card {
+  position:relative;
+  display: inline-block;
+  img {
+    max-width:100%;
+  }
+}
+// 链接
+.w-e_link-card {
+  position:relative;
+  display: block;
+  max-width: 100%;
+
+  .w-e_link-card_link-wrap {
+    display:flex;
+    max-width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration:none;color: #696772;background:#f5f5ff;
+  }
+  // 图片
+  .w-e_link-card_img {
+    height: 40px;
+    width: 40px;
+    margin-right: 6px;
+
+  }
+  // 链接描述
+  .w-e_link-card_detail {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  // 链接名称
+  .w-e_link-card_title {
+    font-size: 16px;
+  }
+  // 链接地址
+  .w-e_link-card_address {
+    font-size: 13px;
+  }
+}
+
+

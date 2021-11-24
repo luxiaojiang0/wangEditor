@@ -4,7 +4,7 @@
  */
 
 import Editor from '../../editor/index'
-import { arrForEach, forEach } from '../../utils/util'
+import {arrForEach, forEach, getRandom} from '../../utils/util'
 import post from '../../editor/upload/upload-core'
 import Progress from '../../editor/upload/progress'
 
@@ -27,6 +27,7 @@ class UploadImg {
      * @param src 图片地址
      */
     public insertImg(src: string, alt?: string, href?: string): void {
+        const cardId = getRandom('w-e_img-card')
         const editor = this.editor
         const config = editor.config
 
@@ -38,11 +39,17 @@ class UploadImg {
         // 设置图片alt
         const altText = alt ? `alt="${alt}" ` : ''
         const hrefText = href ? `data-href="${encodeURIComponent(href)}" ` : ''
-        const style = `style="${config.imageStyle}max-width:100%;"`
         // 先插入图片，无论是否能成功
         editor.cmd.do(
             'insertHTML',
-            `<img src="${src}" ${altText}${hrefText}${style} contenteditable="true"/><p><br></p>`
+            `
+                    <p data-we-empty-p=""><br></p>
+                      <div class="w-e_img-card ${cardId}" contenteditable="false">
+                        <img src="${src}" ${altText}${hrefText}/>
+                            <div class="w-e_delete-button" data-btn-name="delete-button" data-delete-id="${cardId}"></div>
+                      </div>
+                    <p data-we-empty-p=""><br></p>
+                `
         )
         // 执行回调函数
         config.linkImgCallback(src, alt, href)

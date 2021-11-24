@@ -1,5 +1,6 @@
 import Editor from '../editor'
 import { deepClone } from '../utils/util'
+import { WESingToolConfigs } from "./sign-tool";
 
 // 插件注册配置约束
 export interface RegisterOptions {
@@ -54,6 +55,12 @@ export default function initPlugins(editor: Editor) {
         deepClone(editor.pluginsFunctionList)
     )
 
+    // 1. 启用内置插件
+    WESingToolConfigs.forEach(options => {
+        const { intention } = options
+        intention(editor)
+    })
+    // 2. 启用外部插件
     const values = Object.entries(plugins)
     values.forEach(([name, options]) => {
         console.info(`plugin ${name} initializing`)

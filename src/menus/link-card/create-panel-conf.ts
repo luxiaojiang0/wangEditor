@@ -46,41 +46,31 @@ export default function (editor: Editor, text: string, link: string): PanelConf 
      * @param link 链接
      */
     function insertLink(text: string, link: string): void {
+        const cardId = getRandom('w-e_link-card')
         // fix: 修复列表下无法设置超链接的问题(替换选中文字中的标签)
         const subStr = new RegExp(/(<\/*ul>)|(<\/*li>)|(<\/*ol>)/g)
         text = text.replace(subStr, '')
         if (isActive(editor)) {
             // 选区处于链接中，则选中整个菜单，再执行 insertHTML
             selectLinkElem()
-            editor.cmd.do('insertHTML', `<a href="${link}" target="_blank">${text}</a>`)
-        } else {
-            console.log('insert')
-            // 选区未处于链接中，直接插入即可
-            let html = `
-<p></p>
-<div onkeydown="console.log(0)" contenteditable="false" style="display: block;width: 100%;height: 40px;">
-                      <a contenteditable="false" href="${link}" target="_blank" style="display:flex;width: 90%;height: 100%;background: #1e88e5;">
-                          <div style="height: 40px;width: 40px;background: bisque;"></div>
-                          <div>
-                            <div>${text}</div>
-                            <div>${link}</div>
+        }
+        // 选区未处于链接中，直接插入即可
+        let html = `
+            <p data-we-empty-p><br></p>
+                <div class="w-e_link-card ${cardId}" contenteditable="false">
+                      <a class="w-e_link-card_link-wrap" href="${link}" target="_blank">
+                    
+                          <img class="w-e_link-card_img" src="${editor.config.linkCardImg}" />
+                          <div class="w-e_link-card_detail">
+                            <div class="w-e_link-card_title">${text}</div>
+                            <div class="w-e_link-card_address">${link}</div>
                           </div>
                       </a>
+                      <div class="w-e_delete-button" data-btn-name="delete-button" data-delete-id="${cardId}"></div>
                 </div>
-                <p block>3</p>
-`
-            // html = `<a href="${link}" contenteditable="true" style="width: 100%;height: 40px;overflow: hidden;" target="_blank">
-            // ${text}
-            //        </a>`
-            //    html = '<img contenteditable="false" src="http://www.wangeditor.com/imgs/logo.jpeg"style="display: block;width: 100%;height: 40px;overflow: hidden;">'
-
-            // editor.cmd.do('insertHTML', '<p>1</p>')
-            editor.cmd.do('insertHTML', html)
-            // editor.cmd.do('insertHTML', '<p>2</p>')
-            // editor.cmd.do('insertElem', $(html))
-            // editor.cmd.do('insertElem', )
-            // editor.cmd.do('insertHTML', `<img src="http://192.168.8.95:8888/static/card_background.jpg" alt="图片" style="display: block;max-width:100%;" contenteditable="false">`)
-        }
+            <p data-we-empty-p=""><br></p>
+            `
+        editor.cmd.do('insertHTML', html)
     }
 
     /**
@@ -145,9 +135,7 @@ export default function (editor: Editor, text: string, link: string): PanelConf 
                             <button type="button" id="${btnOkId}" class="right">
                                 ${editor.i18next.t('插入')}
                             </button>
-                            <button type="button" id="${btnDelId}" class="gray right" style="display:${delBtnDisplay}">
-                                ${editor.i18next.t('menus.panelMenus.link.取消链接')}
-                            </button>
+                          
                         </div>
                     </div>`,
                 // 事件绑定

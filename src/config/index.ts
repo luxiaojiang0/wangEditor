@@ -104,6 +104,9 @@ export type ConfigType = {
     customInsertVideo: Function | null
 
     menuTooltipPosition: tooltipPositionType
+
+    // 追加
+    linkCardImg: string
 }
 
 export type Resource = {
